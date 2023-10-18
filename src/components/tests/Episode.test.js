@@ -7,7 +7,15 @@ test("renders without error", () => {
   render(<Episode episode={exampleEpisodeData} />)
 });
 
-test("renders the summary test passed as prop", () => {});
+test("renders the summary test passed as prop", async () => {
+  render(<Episode episode={exampleEpisodeData} />)
+  const summary = screen.queryByText(/test summary/i)
+  console.log(summary)
+  expect(summary).toHaveTextContent(/test summary/i)
+  expect(summary).not.toBe(null)
+  expect(summary).toContainHTML("Test Summary")
+
+});
 
 test("renders default image when image is not defined", () => {});
 
@@ -24,7 +32,7 @@ const exampleEpisodeData = {
   runtime: 49,
   season: 1,
   summary:
-    "A young boy mysteriously disappears, and his panicked mother demands that the police find him. Meanwhile, the boy's friends conduct their own search, and meet a mysterious girl in the forest.",
+    "Test Summary",
   type: "regular",
   url: "https://www.tvmaze.com/episodes/553946/stranger-things-1x01-chapter-one-the-vanishing-of-will-byers",
 };
