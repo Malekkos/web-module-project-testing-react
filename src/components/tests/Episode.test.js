@@ -20,8 +20,7 @@ test("renders the summary test passed as prop", () => {
 test("renders default image when image is not defined", () => {
   render(<Episode episode={exampleEpisodeData} />)
   const image = screen.queryByRole("img")
-  console.log(image.alt)
-  // expect(image).
+  // console.log(image.alt)
   expect(image.alt).toEqual("https://i.ibb.co/2FsfXqM/stranger-things.png")
 });
 
