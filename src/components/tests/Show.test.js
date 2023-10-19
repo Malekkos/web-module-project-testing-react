@@ -34,15 +34,22 @@ test('renders same number of options seasons are passed in', () => {
 test('handleSelect is called when an season is selected', () => {
   const handleSelect = jest.fn();
   render(<Show show={exampleShow} selectedSeason={"none"} handleSelect={handleSelect} />)
-  const select = screen.getByLabelText(/Select A Season/i)
-  console.log(select.length) // 3, so correct
-  // console.log(showTwo.textContent)
-  userEvent.selectOptions(select, ["1"]) //works... i think?
-
+  const select = screen.getByLabelText(/select a season/i)
+  console.log(handleSelect)
+  userEvent.selectOptions(select, ["0"])
   expect(handleSelect).toBeCalled()
  });
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => { });
+test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+  const handleSelect = jest.fn()
+  const { rerender } = render(<Show show={exampleShow} selectedSeason={"none"} handleSelect={handleSelect} />)
+  let episodes = screen.queryByTestId(/episodes-container/i)
+  expect(episodes).toBeFalsy()
+
+  rerender(<Show show={exampleShow} selectedSeason={1} handleSelect={handleSelect} />)
+  episodes = screen.queryByTestId(/episodes-container/i)
+  expect(episodes).toBeTruthy()
+ });
 
 
 const exampleShow = {
