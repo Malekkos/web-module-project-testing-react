@@ -12,7 +12,7 @@ test('renders Show component when the button is clicked ', async () => {
   render(<Display displayFun={exampleEpisodeData} />)
   
   const button = screen.getByText(/press to get show data/i)
-  console.log(button)
+  // console.log(button)
   fireEvent.click(button)
   // waitFor const =
 });

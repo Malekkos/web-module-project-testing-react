@@ -16,7 +16,18 @@ test('renders Loading component when prop show is null', () => {
   expect(loading).toHaveTextContent(/fetching data.../i)
  });
 
-test('renders same number of options seasons are passed in', () => { });
+test('renders same number of options seasons are passed in', () => {
+  render(<Show show={exampleShow} selectedSeason={"none"} />)
+  const seasonCount = screen.getAllByRole("option")
+  const seasonOne = screen.getByText(/example 1/i)
+  const seasonTwo = screen.getByText(/example 2/i)
+  // console.log(seasonOne, ",", seasonTwo)
+  // console.log(seasonCount.length) // This is going to include the "NONE", so it SHOULD be 3
+
+  expect(seasonCount).toHaveLength(3) //When 2 seasons are provided, it will be 3
+  expect(seasonOne).toHaveTextContent(/example 1/i)
+  expect(seasonTwo).toHaveTextContent(/example 2/i)
+ });
 
 test('handleSelect is called when an season is selected', () => { });
 
