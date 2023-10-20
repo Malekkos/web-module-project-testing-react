@@ -20,7 +20,16 @@ test('renders Show component when the button is clicked ', async () => {
   expect(evidenceOfShowComponent).toHaveTextContent("Stranger Things")
 });
 
-test('renders show season options matching your data when the button is clicked', () => { });
+test('renders show season options matching your data when the button is clicked', async () => {
+  render(<Display displayFun={exampleEpisodeData} />)
+
+  const button = screen.getByText(/press to get show data/i)
+  fireEvent.click(button)
+  const options = await screen.findAllByRole("option")
+  console.log(options[1].textContent) //Got 6 ~ if we count the empty one, we get 6. Should be correct
+  expect(options[1]).toHaveTextContent(/season 1/i)
+  expect(options[4]).toHaveTextContent(/season 4/i)
+ });
 
 
 
