@@ -21,14 +21,16 @@ test('renders Show component when the button is clicked ', async () => {
 });
 
 test('renders show season options matching your data when the button is clicked', async () => {
-  render(<Display displayFun={exampleEpisodeData} />)
+  const displayFunc = jest.fn()
+  render(<Display displayFun={exampleEpisodeData} displayFunc={displayFunc} />)
 
   const button = screen.getByText(/press to get show data/i)
-  fireEvent.click(button)
+  fireEvent.click(button, )
   const options = await screen.findAllByRole("option")
   console.log(options[1].textContent) //Got 6 ~ if we count the empty one, we get 6. Should be correct
   expect(options[1]).toHaveTextContent(/season 1/i)
   expect(options[4]).toHaveTextContent(/season 4/i)
+  expect(displayFunc).toHaveBeenCalled()
  });
 
 
