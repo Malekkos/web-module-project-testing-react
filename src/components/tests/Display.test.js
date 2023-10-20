@@ -14,7 +14,10 @@ test('renders Show component when the button is clicked ', async () => {
   const button = screen.getByText(/press to get show data/i)
   // console.log(button)
   fireEvent.click(button)
-  // waitFor const =
+  const evidenceOfShowComponent = await screen.findByText("Stranger Things")
+  console.log(evidenceOfShowComponent.textContent)
+  expect(evidenceOfShowComponent).toBeTruthy()
+  expect(evidenceOfShowComponent).toHaveTextContent("Stranger Things")
 });
 
 test('renders show season options matching your data when the button is clicked', () => { });
